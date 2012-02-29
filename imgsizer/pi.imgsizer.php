@@ -313,7 +313,7 @@ function get_some_sizes($img){
 					$img['out_height'] = $auto;
 					$img['out_width'] = '0';
 				}
-			}		
+			}
 
 			// -------------------------------------
 			// Do we want to Crop the image?
@@ -336,6 +336,15 @@ function get_some_sizes($img){
 				$img['out_height'] = $max_height; 
 			}
 			
+			$auto_height = ( ! $this->EE->TMPL->fetch_param('autoheight')) ? '' : $this->EE->TMPL->fetch_param('autoheight');
+			if($auto_height)
+			{
+				$auto_height_factor = $auto_height/$height;
+				$img['out_height'] = round($height*$auto_height_factor);
+				$img['out_width'] = ($width*$auto_height_factor > $max_width) ? $max_width : round($width*$auto_height_factor);
+				$img['crop'] = "yes";
+				$img['proportional'] = false;
+			}
 
 			// set outputs 
 			$img['out_name'] = $img['base_filename'].$color_space.'-'.$img['out_width'].'x'.$img['out_height'].'.'.$img['extension'];
@@ -379,10 +388,9 @@ function do_some_image($img) {
 	$file = $img['root_path'].$img['basename'];
 	$width = $img['out_width'];
 	$height = $img['out_height'];
-	$crop = $img['crop'];	
+	$crop = $img['crop'];
 	$proportional = $img['proportional'];
 	$output = $img['cache_path'].$img['out_name'];
-	
 	
 		$quality = ( ! $this->EE->TMPL->fetch_param('quality')) ? '100' : $this->EE->TMPL->fetch_param('quality');
 		$quality = "100";
