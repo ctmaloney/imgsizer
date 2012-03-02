@@ -1,9 +1,9 @@
-More info at [http://devot-ee.com/add-ons/image-sizer](http://devot-ee.com/add-ons/image-sizer)
+	More info at [http://devot-ee.com/add-ons/image-sizer](http://devot-ee.com/add-ons/image-sizer)
 
-The ImageSizer plugin will resize any JPG, GIF or PNG image to the size specified
+	The ImageSizer plugin will resize any JPG, GIF or PNG image to the size specified
         and cache the resized image to the cache folder.
         
-        If you update the original image a new resized version will be created. 
+				If you update the original image a new resized version will be created. 
 
 		=============================
 		The Tag
