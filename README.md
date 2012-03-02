@@ -1,8 +1,9 @@
 Forked from the current version on devot-ee, to add an auto height parameter.
 
 autoheight=
-	The height the img should be adjusted to fit. When using this parameter use the 'width' parameter as a max width to control when the image will be cropped.  If the resized width is greater than the given width the image will be cropped, if less it will be left alone.  This setting is very useful for creating image galleries where portrait images should only be resized not cropped.
+The height the img should be adjusted to fit. When using this parameter use the 'width' parameter as a max width to control when the image will be cropped.  If the resized width is greater than the given width the image will be cropped, if less it will be left alone.  This setting is very useful for creating image galleries where portrait images should only be resized not cropped.
 
+---
 
 More info at [http://devot-ee.com/add-ons/image-sizer](http://devot-ee.com/add-ons/image-sizer)
 
