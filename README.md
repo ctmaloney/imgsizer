@@ -34,11 +34,11 @@ height=
 auto=
 	the size of the longest side. If the image is landscape, then this sets the width, else it sets the height.
 
-   NOTE:
-   * if you use only width or only height the image will be scaled to match that width or height proportionately. 
-   * if you use auto, image will be scaled to the longest side proportionately. 
-   * if you use both width and height the image will be cropped from center to that width and height.
-   * if "width" is = to "height" the image will be cropped from image center to make a square sized image.
+NOTE:
+* if you use only width or only height the image will be scaled to match that width or height proportionately. 
+* if you use auto, image will be scaled to the longest side proportionately. 
+* if you use both width and height the image will be cropped from center to that width and height.
+* if "width" is = to "height" the image will be cropped from image center to make a square sized image.
 
 quality= 
    [OPTIONAL]
