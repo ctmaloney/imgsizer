@@ -20,6 +20,7 @@ var $return_data = "";
   function Imgsizer()
   {
     $this->EE =& get_instance();
+    $this->EE->load->helper('string');
   }
   
   function size()
@@ -39,7 +40,7 @@ var $return_data = "";
 		}
 		
 		$base_path = str_replace("\\", "/", $base_path);
-		$base_path = $this->EE->functions->remove_double_slashes($base_path);
+		$base_path = reduce_double_slashes($base_path);
 		
 		
 			
@@ -74,7 +75,7 @@ var $return_data = "";
 			
 		$base_path = ( ! $this->EE->TMPL->fetch_param('base_path')) ? $base_path : $this->EE->TMPL->fetch_param('base_path');
 			$base_path = str_replace("\\", "/", $base_path);
-			$base_path = $this->EE->functions->remove_double_slashes($base_path);
+			$base_path = reduce_double_slashes($base_path);
 			$img['base_path']= $base_path;
 			
 		
@@ -119,8 +120,8 @@ var $return_data = "";
 			$src = '/'.$urlarray['path'];
 		}
 				
-		$img['src'] = $this->EE->functions->remove_double_slashes("/".$src);
-		$img['base_path'] = $this->EE->functions->remove_double_slashes($base_path);
+		$img['src'] = reduce_double_slashes("/".$src);
+		$img['base_path'] = reduce_double_slashes($base_path);
 		
 		/*debug*/
 		$this->EE->TMPL->log_item("imgsizer.img[src]: ".$img['src']);
@@ -134,7 +135,7 @@ var $return_data = "";
 		}
 		
 		
-		$img_full_path = $this->EE->functions->remove_double_slashes($img['base_path'].$img['src']);
+		$img_full_path = reduce_double_slashes($img['base_path'].$img['src']);
 		
 		/*debug*/
 		$this->EE->TMPL->log_item("imgsizer.img_full_path: ".$img_full_path);
@@ -160,7 +161,7 @@ var $return_data = "";
 		// get src relitive path
 		// -------------------------------------	
 		$src_pathinfo = pathinfo($img['src']);
-		$img['base_rel_path'] = $this->EE->functions->remove_double_slashes($src_pathinfo['dirname']."/");	
+		$img['base_rel_path'] = reduce_double_slashes($src_pathinfo['dirname']."/");	
 		
 		/*debug*/
 		$this->EE->TMPL->log_item("imgsizer.img[base_rel_path]: ".$img['base_rel_path']);	
@@ -169,7 +170,7 @@ var $return_data = "";
 		// define all the file location pointers we will need 
 		// -------------------------------------	
 		$img_full_pathinfo = pathinfo($img_full_path);		
-		$img['root_path'] = ( ! isset($img_full_pathinfo['dirname'])) ? '' : $this->EE->functions->remove_double_slashes($img_full_pathinfo['dirname']."/");
+		$img['root_path'] = ( ! isset($img_full_pathinfo['dirname'])) ? '' : reduce_double_slashes($img_full_pathinfo['dirname']."/");
 		$img['basename'] = ( ! isset($img_full_pathinfo['basename'])) ? '' : $img_full_pathinfo['basename'];
 		$img['extension'] = ( ! isset($img_full_pathinfo['extension'])) ? '' : $img_full_pathinfo['extension'];
 		$img['base_filename'] = str_replace(".".$img['extension'], "", $img_full_pathinfo['basename']);
@@ -193,11 +194,11 @@ var $return_data = "";
 		// -------------------------------------
 		// build cache location
 		// -------------------------------------
-		$base_cache = $this->EE->functions->remove_double_slashes($base_path."/images/sized/");
+		$base_cache = reduce_double_slashes($base_path."/images/sized/");
 		$base_cache = ( ! $this->EE->TMPL->fetch_param('base_cache')) ? $base_cache : $this->EE->TMPL->fetch_param('base_cache');
-		$base_cache = $this->EE->functions->remove_double_slashes($base_cache);
+		$base_cache = reduce_double_slashes($base_cache);
 		
-		$img['cache_path'] = $this->EE->functions->remove_double_slashes($base_cache.$img['base_rel_path']);
+		$img['cache_path'] = reduce_double_slashes($base_cache.$img['base_rel_path']);
 	
 	         
 	
@@ -349,7 +350,7 @@ function get_some_sizes($img){
 			// set outputs 
 			$img['out_name'] = $img['base_filename'].$color_space.'-'.$img['out_width'].'x'.$img['out_height'].'.'.$img['extension'];
 			$img['root_out_name'] = $img['cache_path'].$img['out_name'];
-			$img['browser_out_path'] = $this->EE->functions->remove_double_slashes("/".str_replace($img['base_path'], '', $img['root_out_name']));
+			$img['browser_out_path'] = reduce_double_slashes("/".str_replace($img['base_path'], '', $img['root_out_name']));
 			
 			
 			return $img;
@@ -583,7 +584,7 @@ function do_output($img){
 		$server_domain = ( ! $this->EE->TMPL->fetch_param('server_domain')) ? '' : $this->EE->TMPL->fetch_param('server_domain');
 		
 		$browser_out_path = str_replace(SLASH, "/", $server_domain).$img['browser_out_path'];
-		$img['browser_out_path'] = $this->EE->functions->remove_double_slashes($browser_out_path);
+		$img['browser_out_path'] = reduce_double_slashes($browser_out_path);
 	
 
 		/** -------------------------------------
@@ -673,9 +674,9 @@ function do_remote($img){
 		$url_filename = parse_url($img['src']);
 		$url_filename = pathinfo($url_filename['path']);
 		
-		$base_cache = $this->EE->functions->remove_double_slashes($img['base_path']."/images/sized/");
+		$base_cache = reduce_double_slashes($img['base_path']."/images/sized/");
 		$base_cache = ( ! $this->EE->TMPL->fetch_param('base_cache')) ? $base_cache : $this->EE->TMPL->fetch_param('base_cache');
-		$base_cache = $this->EE->functions->remove_double_slashes($base_cache);
+		$base_cache = reduce_double_slashes($base_cache);
 		
 		$save_mask = str_replace('/', '-', $url_filename['dirname']);
 		$save_name = $img['url_host_cache_dir'].$save_mask."-".$url_filename['basename'];	
@@ -685,9 +686,9 @@ function do_remote($img){
 		
 		$save_rel_path = $base_cache."/remote/".$save_name;
 		$save_rel_path = "/".str_replace($img['base_path'], '', $save_rel_path);
-		$save_rel_path = $this->EE->functions->remove_double_slashes($save_rel_path);	
+		$save_rel_path = reduce_double_slashes($save_rel_path);	
 		
-		$save_dir = $this->EE->functions->remove_double_slashes($base_cache."/remote/");
+		$save_dir = reduce_double_slashes($base_cache."/remote/");
 
 			if(!is_dir($save_dir))
 			{
