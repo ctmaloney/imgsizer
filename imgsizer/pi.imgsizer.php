@@ -394,11 +394,6 @@ class Imgsizer {
 
 		if ($img['do_cache']) {
 
-			@ini_set("memory_limit", "12M");
-			@ini_set("memory_limit", "16M");
-			@ini_set("memory_limit", "32M");
-			@ini_set("memory_limit", "64M");
-
 			switch (
 					$info[2]) {
 				case IMAGETYPE_GIF:
