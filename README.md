@@ -1,3 +1,5 @@
+## UNMAINTAINED<br> Check https://github.com/meatpaste/imgsizer for EE3 Support
+
 Forked from the current version on devot-ee, to add an auto height parameter.
 
 autoheight=
